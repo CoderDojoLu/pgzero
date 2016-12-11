@@ -27,11 +27,11 @@ class SurfacePainter:
     def _surf(self):
         return self._screen.surface
 
-    def line(self, start, end, color):
+    def line(self, start, end, color, width=1):
         """Draw a line from start to end."""
         start = round_pos(start)
         end = round_pos(end)
-        pygame.draw.line(self._surf, make_color(color), start, end, 1)
+        pygame.draw.line(self._surf, make_color(color), start, end, width)
 
     def circle(self, pos, radius, color):
         """Draw a circle."""
