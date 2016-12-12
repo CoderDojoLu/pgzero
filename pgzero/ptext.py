@@ -201,7 +201,8 @@ def getsurf(text, fontname=None, fontsize=None, width=None, widthem=None, color=
 			lineheight=lineheight, cache=cache)
 		surf = surf0.copy()
 		array = pygame.surfarray.pixels_alpha(surf)
-		array *= alpha
+		import numpy
+		numpy.multiply(array, alpha, out=array, casting="unsafe")
 	elif spx is not None:
 		surf0 = getsurf(text, fontname, fontsize, width, widthem, color=color,
 			background=(0,0,0,0), antialias=antialias, gcolor=gcolor, align=align,
@@ -255,8 +256,8 @@ def getsurf(text, fontname=None, fontsize=None, width=None, widthem=None, color=
 			for lsurf in lsurfs:
 				array = pygame.surfarray.pixels3d(lsurf)
 				for j in (0, 1, 2):
-					array[:,:,j] *= 1.0 - m
-					array[:,:,j] += m * gcolor[j]
+					numpy.multiply(array[:,:,j], 1.0 - m, out=array[:,:,j], casting="unsafe")
+					numpy.multiply(array[:,:,j], m * gcolor[j], out=array[:,:,j], casting="unsafe")
 				del array
 
 		if len(lsurfs) == 1 and gcolor is None:
@@ -288,7 +289,7 @@ def draw(text, pos=None, surf=None, fontname=None, fontsize=None, width=None, wi
 	center=None, centerx=None, centery=None, anchor=None,
 	alpha=1.0, align=None, lineheight=None, angle=0,
 	cache=True):
-	
+
 	if topleft: left, top = topleft
 	if bottomleft: left, bottom = bottomleft
 	if topright: right, top = topright
@@ -333,7 +334,7 @@ def draw(text, pos=None, surf=None, fontname=None, fontsize=None, width=None, wi
 
 	if surf is None: surf = pygame.display.get_surface()
 	surf.blit(tsurf, (x, y))
-	
+
 	if AUTO_CLEAN:
 		clean()
 
@@ -345,7 +346,7 @@ def drawbox(text, rect, fontname=None, lineheight=None, anchor=None, **kwargs):
 	x = rect.x + hanchor * rect.width
 	y = rect.y + vanchor * rect.height
 	fontsize = _fitsize(text, fontname, rect.width, rect.height, lineheight)
-	draw(text, (x, y), fontname=fontname, fontsize=fontsize, lineheight=lineheight, 
+	draw(text, (x, y), fontname=fontname, fontsize=fontsize, lineheight=lineheight,
 		width=rect.width, anchor=anchor, **kwargs)
 
 def clean():
