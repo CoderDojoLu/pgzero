@@ -3,6 +3,13 @@ Pygame Zero
 
 A zero-boilerplate games programming framework for Python 3, based on Pygame.
 
+.. image:: doc/_static/pygame_banner_zero.png
+    :width: 508px
+    :height: 288px
+    :scale: 50%
+    :alt: pygame inspired pgzero banner
+    :align: center
+
 Some examples
 -------------
 
