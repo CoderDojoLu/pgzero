@@ -194,6 +194,8 @@ class PGZeroGame:
         if os.environ.get('DEBUG') and os.environ.get('DEBUG_FPS'):
             print("Printing FPS on console")
             DEBUG_FPS=True
+        else:
+            DEBUG_FPS=False
 
         if os.environ.get('FPS'):
             print("Setting FPS to: ".format(os.environ.get('FPS')))
