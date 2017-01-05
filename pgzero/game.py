@@ -198,7 +198,7 @@ class PGZeroGame:
             DEBUG_FPS=False
 
         if os.environ.get('FPS'):
-            print("Setting FPS to: ".format(os.environ.get('FPS')))
+            print("Setting FPS to: {}".format(os.environ.get('FPS')))
             try:
                 FPS=int(os.environ.get('FPS'))
             except ValueError:
@@ -234,7 +234,7 @@ class PGZeroGame:
 
             pgzclock.tick(dt)
             if DEBUG_FPS:
-                print("FPS: ".format(clock.get_fps()))
+                print("FPS: {}".format(clock.get_fps()))
 
             if update:
                 update(dt)
