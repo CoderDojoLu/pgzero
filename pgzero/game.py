@@ -1,3 +1,4 @@
+import os
 import sys
 import operator
 import time
@@ -184,6 +185,22 @@ class PGZeroGame:
             return draw
 
     def run(self):
+        if os.environ.get('DEBUG'):
+            print("Setting global pgzero DEBUG flag")
+            DEBUG=True
+        else:
+            DEBUG=False
+
+        if os.environ.get('DEBUG') and os.environ.get('DEBUG_FPS'):
+            print("Printing FPS on console")
+            DEBUG_FPS=True
+
+        if os.environ.get('FPS'):
+            print("Setting FPS to: ".format(os.environ.get('FPS')))
+            FPS=os.environ.get('FPS')
+        else:
+            FPS=60
+
         clock = pygame.time.Clock()
         self.reinit_screen()
 
@@ -195,7 +212,7 @@ class PGZeroGame:
 
         self.need_redraw = True
         while True:
-            dt = clock.tick(60) / 1000.0
+            dt = clock.tick(FPS) / 1000.0
 
             for event in pygame.event.get():
                 if event.type == pygame.QUIT:
@@ -210,6 +227,8 @@ class PGZeroGame:
                 self.dispatch_event(event)
 
             pgzclock.tick(dt)
+            if DEBUG_FPS:
+                print("FPS: ".format(pygame.time.Clock.get_fps()))
 
             if update:
                 update(dt)
