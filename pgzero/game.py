@@ -199,7 +199,11 @@ class PGZeroGame:
 
         if os.environ.get('FPS'):
             print("Setting FPS to: ".format(os.environ.get('FPS')))
-            FPS=os.environ.get('FPS')
+            try:
+                FPS=int(os.environ.get('FPS'))
+            except ValueError:
+                print("Your custom FPS value seems invalid. Defaulting to 60 FPS")
+                FPS=60
         else:
             FPS=60
 
@@ -230,7 +234,7 @@ class PGZeroGame:
 
             pgzclock.tick(dt)
             if DEBUG_FPS:
-                print("FPS: ".format(pygame.time.Clock.get_fps()))
+                print("FPS: ".format(clock.get_fps()))
 
             if update:
                 update(dt)
