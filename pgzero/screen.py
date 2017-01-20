@@ -41,21 +41,33 @@ class SurfacePainter:
         pos = round_pos(pos)
         pygame.gfxdraw.pixel(self._surf, pos[0], pos[1], make_color(color))
 
-    def circle(self, pos, radius, color):
+    def circle(self, pos, radius, color, width=1):
         """Draw a circle."""
         pos = round_pos(pos)
-        pygame.draw.circle(self._surf, make_color(color), pos, radius, 1)
+        pygame.draw.circle(self._surf, make_color(color), pos, radius, width)
 
     def filled_circle(self, pos, radius, color):
         """Draw a filled circle."""
         pos = round_pos(pos)
         pygame.draw.circle(self._surf, make_color(color), pos, radius, 0)
 
-    def rect(self, rect, color):
+    def ellipse(self, rect, color, width=1):
+        """Draw an ellipse."""
+        if not isinstance(rect, RECT_CLASSES):
+            raise TypeError("screen.draw.ellipse() requires a rect to draw")
+        pygame.draw.ellipse(self._surf, make_color(color), rect, width)
+
+    def filled_ellipse(self, rect, color):
+        """Draw a filled ellipse."""
+        if not isinstance(rect, RECT_CLASSES):
+            raise TypeError("screen.draw.filled_ellipse() requires a rect to draw")
+        pygame.draw.ellipse(self._surf, make_color(color), rect, 0)
+
+    def rect(self, rect, color, width=1):
         """Draw a rectangle."""
         if not isinstance(rect, RECT_CLASSES):
             raise TypeError("screen.draw.rect() requires a rect to draw")
-        pygame.draw.rect(self._surf, make_color(color), rect, 1)
+        pygame.draw.rect(self._surf, make_color(color), rect, width)
 
     def filled_rect(self, rect, color):
         """Draw a filled rectangle."""
