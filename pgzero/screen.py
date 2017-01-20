@@ -1,5 +1,6 @@
 import pygame
 import pygame.draw
+import pygame.gfxdraw
 from . import ptext
 from .rect import RECT_CLASSES
 from . import loaders
@@ -32,6 +33,13 @@ class SurfacePainter:
         start = round_pos(start)
         end = round_pos(end)
         pygame.draw.line(self._surf, make_color(color), start, end, width)
+
+    def pixel(self, pos, color):
+        """ /!\ EXPERIMENTAL!: meaning this api may change, or dissapear in later pygame releases. If you use this, your code will break with the next pygame release.
+
+        Draw a pixel."""
+        pos = round_pos(pos)
+        pygame.gfxdraw.pixel(self._surf, pos[0], pos[1], make_color(color))
 
     def circle(self, pos, radius, color):
         """Draw a circle."""
