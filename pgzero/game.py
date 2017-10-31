@@ -194,6 +194,12 @@ class PGZeroGame:
             DEBUG=True
         else:
             DEBUG=False
+        """Invoke the main loop, and then clean up."""
+        try:
+            self.mainloop()
+        finally:
+            pygame.display.quit()
+            pygame.mixer.quit()
 
         if os.environ.get('DEBUG') and os.environ.get('DEBUG_FPS'):
             print("Printing FPS on console")
@@ -211,6 +217,8 @@ class PGZeroGame:
         else:
             FPS=60
 
+    def mainloop(self):
+        """Run the main loop of Pygame Zero."""
         clock = pygame.time.Clock()
         self.reinit_screen()
 
