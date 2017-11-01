@@ -189,18 +189,13 @@ class PGZeroGame:
             return draw
 
     def run(self):
+        global FPS
+        global DEBUG_FPS
         if os.environ.get('DEBUG'):
             print("Setting global pgzero DEBUG flag")
             DEBUG=True
         else:
             DEBUG=False
-        """Invoke the main loop, and then clean up."""
-        try:
-            self.mainloop()
-        finally:
-            pygame.display.quit()
-            pygame.mixer.quit()
-
         if os.environ.get('DEBUG') and os.environ.get('DEBUG_FPS'):
             print("Printing FPS on console")
             DEBUG_FPS=True
@@ -216,6 +211,13 @@ class PGZeroGame:
                 FPS=60
         else:
             FPS=60
+        """Invoke the main loop, and then clean up."""
+        try:
+            self.mainloop()
+        finally:
+            pygame.display.quit()
+            pygame.mixer.quit()
+
 
     def mainloop(self):
         """Run the main loop of Pygame Zero."""
