@@ -14,13 +14,14 @@ extras_require = {
 
 setup(
     name='pgzero',
-    version='1.1s',
+    version='1.2a1s',
     description="A zero-boilerplate 2D games framework",
     long_description=LONG_DESCRIPTION,
     author='Daniel Pope',
     author_email='mauve@mauveweb.co.uk',
     url='http://pypi.python.org/pypi/pgzero',
     packages=['pgzero'],
+    py_modules=['pgzrun'],
     entry_points={
         'console_scripts': [
             'pgzrun = pgzero.runner:main'

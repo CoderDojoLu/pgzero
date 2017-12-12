@@ -19,9 +19,11 @@ Courses
     :maxdepth: 2
 
     introduction
+    from-scratch
 
 .. This one is not yet complete
 .. learn-programming
+.. flappy-bird
 
 Reference
 ---------
@@ -29,9 +31,17 @@ Reference
 .. toctree::
     :maxdepth: 2
 
-    installation
     hooks
     builtins
+
+User Guide
+----------
+
+.. toctree::
+    :maxdepth: 2
+
+    installation
+    ide-mode
     contributing
     changelog
 
